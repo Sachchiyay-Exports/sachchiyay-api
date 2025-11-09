@@ -1,4 +1,5 @@
 {
+<<<<<<< HEAD
   "name": "sachchiyay_exports",
   "version": "0.1.0",
   "private": true,
@@ -41,5 +42,23 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+=======
+  "name": "backend",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.3",
+    "express": "^5.1.0",
+    "mongoose": "^8.19.3",
+    "nodemailer": "^7.0.10"
+>>>>>>> 125a68449358082e100c30c8a3ada8a223d5f7f0
   }
 }
