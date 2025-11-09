@@ -1,0 +1,1378 @@
+/* -------------------------
+   GENERAL RESET & BASE
+----------------------------*/
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Arial', sans-serif;
+  line-height: 1.6;
+  color: #3a2e28;
+  background-color: #fffefb;
+  scroll-behavior: smooth;
+}
+
+/* FIX: Scroll lock when sidebar is open */
+body.menu-open {
+    overflow: hidden; 
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.3s ease;
+}
+
+h2 {
+  text-align: center;
+  font-size: 2.2em;
+  margin-bottom: 40px;
+  color: #4A2613;
+  letter-spacing: 0.5px;
+}
+
+section {
+  padding: 60px 5%;
+}
+
+/* -------------------------
+   NAVBAR (Desktop Base)
+----------------------------*/
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 5%;
+  background-color: rgba(107, 62, 38, 0.92);
+  color: #fff;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.25);
+  transition: all 0.4s ease-in-out;
+  z-index: 999;
+  backdrop-filter: blur(6px);
+}
+
+.navbar.scrolled {
+  background-color: #4A2613;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.35);
+}
+
+.logo img {
+  height: 60px;
+  width: auto;
+  filter: drop-shadow(0 3px 6px rgba(0,0,0,0.3));
+}
+
+/* Navbar Links (Desktop) */
+.navbar ul {
+  list-style: none;
+  display: flex; /* ENSURES HORIZONTAL LAYOUT ON DESKTOP */
+  gap: 12px;
+}
+
+.navbar ul li {
+  position: relative;
+}
+
+.navbar ul li a {
+  padding: 10px 15px;
+  font-weight: 600;
+  color: #FFF8E1;
+  letter-spacing: 0.5px;
+  border-radius: 6px;
+}
+
+.navbar ul li a:hover {
+  color: #E2B04A;
+  background-color: rgba(255,255,255,0.08);
+}
+
+/* Dropdown Menu (Desktop Hover) */
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: #6B3E26;
+  border-radius: 8px;
+  padding: 6px 0;
+  min-width: 190px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+  flex-direction: column;
+  opacity: 0;
+  transform: translateY(10px);
+  pointer-events: none;
+  transition: all 0.25s ease;
+  z-index: 1000;
+}
+
+.dropdown-menu.show {
+  display: flex;
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+/* Each item (Dropdown) */
+.dropdown-menu li {
+  width: 100%;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.dropdown-menu li:last-child {
+  border-bottom: none;
+}
+
+/* Links (Dropdown) */
+.dropdown-menu li a {
+  display: block;
+  padding: 10px 18px;
+  color: #FFF8E1;
+  font-weight: 500;
+  text-align: left;
+  white-space: nowrap;
+  transition: all 0.3s ease;
+}
+
+/* Hover effect (Dropdown) */
+.dropdown-menu li a:hover {
+  background-color: #E2B04A;
+  color: #4A2613;
+  padding-left: 25px;
+}
+
+
+/* -------------------------
+   GENERAL RESET & BASE
+----------------------------*/
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Arial', sans-serif;
+  line-height: 1.6;
+  color: #3a2e28;
+  background-color: #fffefb;
+  scroll-behavior: smooth;
+}
+
+/* FIX: Scroll lock when sidebar is open */
+body.menu-open {
+    overflow: hidden; 
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.3s ease;
+}
+
+h2 {
+  text-align: center;
+  font-size: 2.2em;
+  margin-bottom: 40px;
+  color: #4A2613;
+  letter-spacing: 0.5px;
+}
+
+section {
+  padding: 60px 5%;
+}
+
+/* -------------------------
+   NAVBAR (Desktop Base)
+----------------------------*/
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 5%;
+  background-color: rgba(107, 62, 38, 0.92);
+  color: #fff;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.25);
+  transition: all 0.4s ease-in-out;
+  z-index: 999;
+  backdrop-filter: blur(6px);
+}
+
+.navbar.scrolled {
+  background-color: #4A2613;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.35);
+}
+
+.logo img {
+  height: 60px;
+  width: auto;
+  filter: drop-shadow(0 3px 6px rgba(0,0,0,0.3));
+}
+
+/* Navbar Links (Desktop) */
+.navbar ul {
+  list-style: none;
+  display: flex; /* ENSURES HORIZONTAL LAYOUT ON DESKTOP */
+  gap: 12px;
+}
+
+.navbar ul li {
+  position: relative;
+}
+
+.navbar ul li a {
+  padding: 10px 15px;
+  font-weight: 600;
+  color: #FFF8E1;
+  letter-spacing: 0.5px;
+  border-radius: 6px;
+}
+
+.navbar ul li a:hover {
+  color: #E2B04A;
+  background-color: rgba(255,255,255,0.08);
+}
+
+/* Dropdown Menu (Desktop Hover) */
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: #6B3E26;
+  border-radius: 8px;
+  padding: 6px 0;
+  min-width: 190px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+  flex-direction: column;
+  opacity: 0;
+  transform: translateY(10px);
+  pointer-events: none;
+  transition: all 0.25s ease;
+  z-index: 1000;
+}
+
+.dropdown-menu.show {
+  display: flex;
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+/* Each item (Dropdown) */
+.dropdown-menu li {
+  width: 100%;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.dropdown-menu li:last-child {
+  border-bottom: none;
+}
+
+/* Links (Dropdown) */
+.dropdown-menu li a {
+  display: block;
+  padding: 10px 18px;
+  color: #FFF8E1;
+  font-weight: 500;
+  text-align: left;
+  white-space: nowrap;
+  transition: all 0.3s ease;
+}
+
+/* Hover effect (Dropdown) */
+.dropdown-menu li a:hover {
+  background-color: #E2B04A;
+  color: #4A2613;
+  padding-left: 25px;
+}
+
+
+/* -------------------------
+   MOBILE NAVBAR (Sidebar Setup)
+----------------------------*/
+
+/* Mobile Menu Header with Close Button */
+.mobile-header {
+    display: none; /* Hidden on desktop */
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 5%;
+    background-color: #4A2613;
+    color: #fff;
+    position: sticky; 
+    top: 0;
+    z-index: 10;
+}
+
+.mobile-header h3 {
+    margin: 0;
+    font-size: 1.4em;
+}
+
+.close-button-mobile {
+    background: none;
+    border: none;
+    color: #FFF;
+    font-size: 28px;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.close-button-mobile:hover {
+    color: #E2B04A;
+}
+
+.menu-toggle {
+    display: none; /* Hidden on desktop */
+    font-size: 28px;
+    cursor: pointer;
+    color: #fff;
+    z-index: 1001;
+    transition: 0.3s ease;
+}
+
+/* Desktop .nav-menu reset */
+.nav-menu {
+    width: auto;
+    max-height: none; 
+    position: static;
+    background: transparent;
+    transition: none;
+    display: flex; /* ENFORCES HORIZONTAL DESKTOP VIEW */
+}
+
+/* New Backdrop for a true slide-over effect */
+.sidebar-backdrop {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .sidebar-backdrop {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.5); /* Semi-transparent black overlay */
+        z-index: 997; /* Below the sidebar (998) but above content */
+        display: block; /* Shown only when sidebar is open via JS */
+    }
+    
+    /* MOBILE OVERRIDES */
+    .navbar {
+        padding: 10px 5%;
+    }
+
+    .mobile-header {
+        display: flex; /* Show mobile header */
+    }
+
+    .menu-toggle {
+        display: block; /* Show hamburger icon */
+    }
+
+    /* Side Bar Styling */
+    .nav-menu {
+        position: fixed; /* Must be fixed to stay over content */
+        top: 0;
+        /* FIX: Slide-in from the LEFT */
+        left: 0; 
+        height: 100vh; 
+        width: 80%; 
+        max-width: 300px;
+        background-color: #6B3E26;
+        box-shadow: 4px 0 15px rgba(0, 0, 0, 0.3); /* Adjusted shadow direction */
+        
+        /* SLIDE-OUT POSITION: Start completely off-screen to the left */
+        transform: translateX(-100%); 
+        transition: transform 0.4s ease-in-out;
+        z-index: 998;
+        display: block; /* Switch to block flow for vertical stack */
+        overflow-y: auto; 
+    }
+
+    .nav-menu.open {
+        /* SLIDE-IN POSITION: Move into view */
+        transform: translateX(0); 
+    }
+
+    /* Menu Item Styling */
+    .nav-menu ul {
+        flex-direction: column;
+        text-align: left;
+        padding: 0;
+        margin-top: 0;
+    }
+
+    .nav-menu ul li {
+        width: 100%;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .nav-menu ul li a {
+        padding: 15px 20px;
+        color: #FFF8E1;
+        width: 100%;
+        display: block;
+    }
+
+    /* Mobile Dropdown Fix */
+    .dropdown-menu {
+        position: static;
+        box-shadow: none;
+        background: rgba(0, 0, 0, 0.2);
+        margin: 0;
+        padding: 0;
+    }
+
+    .dropdown-menu.show {
+        display: flex; 
+        position: static;
+        opacity: 1;
+        transform: none;
+        pointer-events: auto;
+    }
+    
+    /* Ensure mobile links don't inherit unnecessary bottom borders */
+    .dropdown-menu li a {
+        border-bottom: none;
+    }
+}
+/* --- (Remaining CSS styles for Slider, About Us, etc., are correct and omitted for brevity) --- */
+
+/* -------------------------
+   SLIDER
+----------------------------*/
+.slider-container {
+  position: relative;
+  max-width: 100%;
+  margin-top: 80px;
+  overflow: hidden;
+}
+
+.slider-wrapper {
+  position: relative;
+  width: 100%;
+  height: 700px;
+}
+
+.slide {
+  display: none;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.slider-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.85) contrast(1.1);
+  transition: transform 0.8s ease;
+}
+
+.slide-caption {
+  position: absolute;
+  bottom: 12%;
+  width: 100%;
+  text-align: center;
+  color: #fff8e1;
+  font-size: 2em;
+  font-weight: 700;
+  text-shadow: 0 4px 10px rgba(0, 0, 0, 0.6);
+  letter-spacing: 1px;
+  animation: captionIn 1s ease;
+}
+
+@keyframes captionIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Navigation Arrows */
+.prev, .next {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  width: 45px;
+  height: 45px;
+  margin-top: -22px;
+  color: #fff;
+  font-size: 22px;
+  transition: 0.3s ease;
+  border-radius: 50%;
+  background-color: rgba(107, 62, 38, 0.75);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.prev:hover, .next:hover {
+  background-color: #E2B04A;
+  color: #4A2613;
+  transform: scale(1.1);
+}
+
+.next { right: 25px; }
+.prev { left: 25px; }
+
+/* Dots */
+.dot {
+  cursor: pointer;
+  height: 14px;
+  width: 14px;
+  margin: 0 4px;
+  background-color: #d3c0a2;
+  border-radius: 50%;
+  display: inline-block;
+  transition: all 0.3s ease;
+}
+
+.active, .dot:hover {
+  background-color: #E2B04A;
+}
+
+/* Fade animation for slides */
+.fade {
+  animation-name: fade;
+  animation-duration: 1.2s;
+}
+
+@keyframes fade {
+  from { opacity: 0.6; }
+  to { opacity: 1; }
+}
+
+/* -------------------------
+   SCROLL TO TOP BUTTON
+----------------------------*/
+#scrollTopBtn {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  z-index: 1000;
+  background-color: #6B3E26;
+  color: #fff;
+  border: none;
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 24px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+  display: none;
+}
+
+#scrollTopBtn:hover {
+  background-color: #E2B04A;
+  color: #6B3E26;
+  transform: translateY(-5px);
+}
+
+#scrollTopBtn.show {
+  display: block;
+  animation: fadeIn 0.4s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* -------------------------
+   RESPONSIVE SLIDER HEIGHT
+----------------------------*/
+@media (max-width: 992px) {
+  .slider-wrapper { height: 500px; }
+  .slide-caption { font-size: 1.6em; }
+}
+
+@media (max-width: 600px) {
+  .slider-wrapper { height: 350px; }
+  .slide-caption { font-size: 1.2em; }
+}
+
+
+
+
+/* --- About Us Section --- */
+.about-us {
+  background-color: #fffdf9; /* very light cream background for warmth */
+  padding: 80px 5%;
+  text-align: center;
+  color: #3a2e28;
+}
+
+/* Section Heading */
+.about-us h2 {
+  font-size: 2.4em;
+  font-weight: 700;
+  color: #4A2613; /* deep spice brown */
+  letter-spacing: 1px;
+}
+
+/* Divider Line */
+.section-divider {
+  max-width: 80px;
+  height: 4px;
+  background-color: #E2B04A; /* gold accent */
+  border: none;
+  border-radius: 3px;
+  margin: 20px auto 40px;
+}
+
+/* Container blocks */
+.about-header,
+.company-introduction {
+  max-width: 900px;
+  margin: 0 auto 50px;
+  text-align: left;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  padding: 30px 40px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Subtle hover pop for engagement */
+.about-header:hover,
+.company-introduction:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+}
+
+/* Sub-headings */
+.about-header h3,
+.company-introduction h3 {
+  text-align: center;
+  font-size: 1.8em;
+  color: #cc9900; /* spice gold tone */
+  margin-bottom: 15px;
+}
+
+/* Paragraphs */
+.about-header p,
+.company-introduction p {
+  margin-bottom: 15px;
+  font-size: 1.05em;
+  line-height: 1.8;
+  color: #4a3b32;
+}
+
+/* Final Tagline */
+.final-tagline {
+  font-style: italic;
+  font-weight: bold;
+  text-align: center !important;
+  margin-top: 25px;
+  padding-top: 15px;
+  border-top: 1px solid #eee;
+  color: #4A2613;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .about-header,
+  .company-introduction {
+    padding: 20px;
+  }
+
+  .about-us h2 {
+    font-size: 2em;
+  }
+
+  .about-header h3,
+  .company-introduction h3 {
+    font-size: 1.5em;
+  }
+}
+
+/* -------------------------
+   PRODUCTS & GALLERY SECTIONS
+----------------------------*/
+.products,
+.gallery {
+  text-align: center;
+  padding: 80px 5%;
+  background-color: #fffdf9; /* light warm background */
+}
+
+.product-list,
+.gallery-list {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  flex-wrap: wrap;
+  margin-bottom: 40px;
+}
+
+/* Card styles */
+.product-card,
+.gallery-item {
+  width: 300px;
+  text-align: center;
+  background-color: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.product-card:hover,
+.gallery-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+}
+
+.product-card img,
+.gallery-item img {
+  width: 100%;
+  height: 260px;
+  object-fit: cover;
+}
+
+.product-card h4 {
+  padding: 15px 0 10px;
+  color: #4A2613;
+  font-size: 1.15em;
+  font-weight: 600;
+}
+
+
+/* Card actions (buttons below image) */
+.card-actions {
+  display: flex;
+  justify-content: space-around;
+  padding: 12px;
+  border-top: 1px solid #eee;
+}
+
+/* -------------------------
+   BUTTONS
+----------------------------*/
+.btn-primary,
+.btn-submit {
+  background-color: #E2B04A; /* Gold button */
+  color: #4A2613;
+  padding: 10px 30px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1em;
+  font-weight: 600;
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+.btn-primary:hover,
+.btn-submit:hover {
+  background-color: #cc9900;
+  transform: translateY(-2px);
+}
+
+/* Secondary buttons */
+.btn-inquiry,
+.btn-whatsapp {
+  padding: 8px 15px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 500;
+  border: none;
+  transition: all 0.3s;
+}
+
+.btn-inquiry {
+  background-color: transparent;
+  border: 1px solid #E2B04A;
+  color: #4A2613;
+}
+
+.btn-inquiry:hover {
+  background-color: #E2B04A;
+  color: #fff;
+}
+
+.btn-whatsapp {
+  background-color: #25D366;
+  color: white;
+}
+
+.btn-whatsapp:hover {
+  background-color: #1da851;
+}
+
+
+/* -------------------------
+   MODAL (INQUIRY POPUP)
+----------------------------*/
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(3px);
+  padding-top: 50px;
+}
+
+.modal-content {
+  background-color: #fff;
+  margin: 5% auto;
+  padding: 0;
+  width: 90%;
+  max-width: 550px;
+  border-radius: 12px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Header */
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 25px;
+  background-color: #6B3E26;
+  color: #FFF8E1;
+  border-radius: 12px 12px 0 0;
+}
+
+.modal-header h3 {
+  margin: 0;
+  font-size: 1.25em;
+  font-weight: 600;
+}
+
+.close-button {
+  color: #FFF8E1;
+  font-size: 26px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.close-button:hover {
+  color: #E2B04A;
+}
+
+/* Form Body */
+.modal-form {
+  padding: 25px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.modal-form input[type="text"],
+.modal-form input[type="tel"],
+.modal-form input[type="email"],
+.modal-form textarea {
+  width: 100%;
+  padding: 12px 15px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 1em;
+  background-color: #f9f9f9;
+  transition: border-color 0.3s, background-color 0.3s;
+}
+
+.modal-form input:focus,
+.modal-form textarea:focus {
+  border-color: #E2B04A;
+  background-color: #fff;
+  outline: none;
+}
+
+/* Footer */
+.modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  padding: 20px 25px;
+  border-top: 1px solid #eee;
+}
+
+.btn-cancel {
+  background: transparent;
+  color: #666;
+  border: 1px solid #ccc;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.btn-cancel:hover {
+  border-color: #4A2613;
+  color: #4A2613;
+}
+
+.btn-inquiry-now {
+  background-color: #E2B04A;
+  color: #4A2613;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.3s;
+}
+
+.btn-inquiry-now:hover {
+  background-color: #cc9900;
+}
+
+/* -------------------------
+   INQUIRY FORM (PAGE)
+----------------------------*/
+.inquiry-form form {
+  max-width: 800px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding: 40px;
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+}
+
+.form-group-half {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.form-group-half input {
+  flex: 1;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+textarea {
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1em;
+  width: 100%;
+  background-color: #f9f9f9;
+  transition: border-color 0.3s, background-color 0.3s;
+}
+
+input:focus,
+textarea:focus {
+  border-color: #E2B04A;
+  background-color: #fff;
+  outline: none;
+}
+
+textarea {
+  resize: vertical;
+}
+
+/* Submit button */
+.btn-submit {
+  align-self: center;
+  width: 200px;
+  background-color: #E2B04A;
+  color: #4A2613;
+  border: none;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+}
+
+.btn-submit:hover {
+  background-color: #cc9900;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .product-card,
+  .gallery-item {
+    width: 90%;
+  }
+
+  .inquiry-form form {
+    padding: 25px;
+  }
+
+  .form-group-half {
+    flex-direction: column;
+  }
+}
+
+
+/* -------------------------
+   CONTACT DETAILS SECTION
+----------------------------*/
+.contact-details {
+  background-color: #fffdf9; /* soft cream tone */
+  padding: 80px 5%;
+}
+
+.contact-map-info {
+  display: flex;
+  max-width: 1100px;
+  margin: 0 auto;
+  align-items: center;
+  gap: 50px;
+  flex-wrap: wrap;
+}
+
+.map-container {
+  flex: 1;
+  min-width: 320px;
+  height: 320px;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.map-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.contact-info {
+  flex: 1;
+  min-width: 320px;
+  background: #fff;
+  border-radius: 12px;
+  padding: 30px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.contact-info:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+}
+
+.contact-info h4 {
+  font-size: 1.6em;
+  margin-bottom: 20px;
+  color: #4A2613;
+  border-bottom: 2px solid #E2B04A;
+  display: inline-block;
+  padding-bottom: 5px;
+}
+
+.contact-info p {
+  margin-bottom: 10px;
+  color: #3a2e28;
+  font-size: 1em;
+  line-height: 1.6;
+}
+
+/* -------------------------
+   FOOTER SECTION
+----------------------------*/
+.footer-top-section {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  background-color: #E2DFCC; /* light beige tone */
+  padding: 40px 5%;
+  border-top: 3px solid #E2B04A;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+/* -------------------------
+   FOOTER ENHANCEMENTS
+----------------------------*/
+
+/* Social Icons Row */
+.footer-social-icons {
+  margin-top: 20px;
+  display: flex;
+  gap: 15px;
+}
+
+.footer-social-icons .social-icon {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background-color: #6B3E26; /* spice brown */
+  color: #FFF8E1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.footer-social-icons .social-icon:hover {
+  background-color: #E2B04A; /* gold highlight */
+  color: #4A2613;
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+}
+
+/* Glow animation (on hover) */
+.footer-social-icons .social-icon:hover i {
+  animation: pulse 1s infinite alternate;
+}
+
+@keyframes pulse {
+  from { transform: scale(1); opacity: 0.9; }
+  to { transform: scale(1.2); opacity: 1; }
+}
+
+/* Add soft fade-in to footer */
+.footer-top-section {
+  animation: fadeUp 1s ease forwards;
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+@keyframes fadeUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+/* Contact & Store Icons */
+.contact-detail i,
+.footer-column ul li a i {
+  color: #E2B04A; /* gold spice color */
+  margin-right: 10px;
+  font-size: 1em;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.footer-column ul li a i {
+  font-size: 0.95em;
+}
+
+.footer-column ul li a:hover i {
+  color: #6B3E26; /* dark spice tone */
+  transform: translateX(3px);
+}
+
+
+/* Columns */
+.footer-column {
+  flex-basis: 18%;
+  min-width: 180px;
+  margin-bottom: 30px;
+}
+
+.footer-logo-col {
+  flex-basis: 25%;
+  min-width: 250px;
+}
+
+.footer-app-col {
+  flex-basis: 15%;
+  min-width: 150px;
+}
+
+/* Headings */
+.footer-column h4 {
+  font-size: 1.1em;
+  font-weight: 700;
+  margin-bottom: 20px;
+  color: #4A2613;
+}
+
+/* Logo Area */
+.footer-logo {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.sachchiyay-footer-logo {
+  height: 45px;
+  width: auto;
+  margin-right: 10px;
+  border-radius: 6px;
+}
+
+.logo-text {
+  font-size: 1.4em;
+  font-weight: 600;
+  color: #E2B04A; /* Gold accent */
+}
+
+/* Links */
+.footer-column ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-column ul li {
+  margin-bottom: 10px;
+}
+
+.footer-column ul li a {
+  color: #444;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer-column ul li a:hover {
+  color: #cc9900;
+}
+
+/* Contact Info Lines */
+.contact-detail {
+  margin-bottom: 10px;
+  display: flex;
+  align-items: flex-start;
+  color: #3a2e28;
+}
+
+.contact-detail i {
+  margin-right: 10px;
+  color: #E2B04A;
+  font-size: 1.1em;
+}
+
+/* App Links */
+.footer-app-col h4 {
+  text-align: left;
+}
+
+.app-link {
+  display: block;
+  margin-bottom: 12px;
+}
+
+.app-badge {
+  width: 100%;
+  max-width: 150px;
+  height: auto;
+  border-radius: 6px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* -------------------------
+   COPYRIGHT BAR
+----------------------------*/
+.footer-copyright-bar {
+  padding: 12px 5%;
+  background-color: #F5F3E6;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  font-size: 0.9em;
+  color: #555;
+}
+
+.footer-copyright-bar p {
+  margin: 5px 0;
+}
+
+.footer-legal-links a {
+  color: #4A2613;
+  padding: 0 8px;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.footer-legal-links a:hover {
+  text-decoration: underline;
+  color: #E2B04A;
+}
+
+/* -------------------------
+   RESPONSIVE ADJUSTMENTS
+----------------------------*/
+@media (max-width: 1024px) {
+  .footer-column {
+    flex-basis: 30%;
+  }
+  .footer-logo-col {
+    flex-basis: 100%;
+    text-align: center;
+  }
+  .footer-logo {
+    justify-content: center;
+  }
+  .contact-map-info {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 768px) {
+  .footer-column {
+    flex-basis: 45%;
+  }
+  .footer-top-section {
+    justify-content: flex-start;
+  }
+  .footer-copyright-bar {
+    flex-direction: column;
+    gap: 8px;
+    text-align: center;
+  }
+  .contact-info {
+    padding: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .footer-column {
+    flex-basis: 100%;
+    text-align: center;
+  }
+  .contact-info {
+    text-align: center;
+  }
+  .contact-detail {
+    justify-content: center;
+  }
+}
+/* style.css (Near the end, inside the responsive blocks) */
+
+/* FIX 1: Ensure the list items don't interfere with the contact column */
+.footer-column ul {
+    /* Reset margin/padding to prevent overflow */
+    padding: 0;
+    margin: 0;
+}
+
+/* FIX 2: Constrain the columns on medium screens */
+@media (max-width: 768px) {
+  .footer-column {
+    /* This ensures columns take up space correctly and don't overflow */
+    flex-basis: 45%; 
+    min-width: 200px; /* Ensure they have enough room */
+    /* Add margin to separate columns vertically */
+    margin-bottom: 20px;
+  }
+  
+  /* Specifically target the utility links column if necessary, 
+     though the general .footer-column fix usually suffices. */
+}
