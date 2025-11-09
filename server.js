@@ -1,14 +1,14 @@
 // backend/server.js
 
-// --- 1. Imports ---
+// --- 1. Imports (All Required Modules) ---
 const express = require('express');
 const dotenv = require('dotenv'); 
 const cors = require('cors');
 const asyncHandler = require('express-async-handler');
-const sgMail = require('@sendgrid/mail');
-// const mongoose = require('mongoose'); // Uncomment this if you are using MongoDB
+const sgMail = require('@sendgrid/mail'); // SendGrid Mailer
+// const mongoose = require('mongoose'); // Uncomment if you are using MongoDB
 
-// Load environment variables immediately
+// Load environment variables immediately from .env file (for local use)
 dotenv.config();
 
 const app = express();
@@ -16,27 +16,27 @@ const PORT = process.env.PORT || 5000;
 const API_ENDPOINT = '/api/inquiries'; 
 
 // --- 2. SendGrid Configuration (CRITICAL) ---
+// This requires the SENDGRID_API_KEY environment variable to be set on Render
 if (process.env.SENDGRID_API_KEY) {
     sgMail.setApiKey(process.env.SENDGRID_API_KEY);
     console.log("SendGrid API Key successfully loaded.");
 } else {
-    // This warning is helpful, but the service will still run.
     console.error("SENDGRID_API_KEY is NOT set. Email sending will fail.");
 }
 
 // --- 3. Middleware Setup ---
-// CRITICAL FIX: Use FRONTEND_URL to restrict CORS access to your Vercel site
+// CRITICAL: CORS Configuration to allow requests from your Vercel frontend URL
 app.use(cors({
-    origin: ['http://localhost:3000', process.env.FRONTEND_URL], 
+    origin: ['http://localhost:3000', process.env.FRONTEND_URL], // FRONTEND_URL MUST be set on Render
     credentials: true,
 })); 
-app.use(express.json()); // Required to read JSON bodies from the frontend
-app.use(express.urlencoded({ extended: true })); // Good practice for form data
+app.use(express.json()); // Parses incoming JSON requests
+app.use(express.urlencoded({ extended: true })); // Parses incoming URL-encoded data
 
 
-// --- 4. Inquiry Submission Route ---
+// --- 4. Inquiry Submission Route (using SendGrid) ---
 app.post(API_ENDPOINT, asyncHandler(async (req, res) => {
-    // Data received from the React InquiryForm component
+    // Data received from the frontend (InquiryForm)
     const { name, email, contactNumber, subject, remark } = req.body;
 
     // Input Validation
@@ -47,10 +47,8 @@ app.post(API_ENDPOINT, asyncHandler(async (req, res) => {
 
     // Email configuration for SendGrid
     const msg = {
-        // Recipient email address
         to: process.env.RECIPIENT_EMAIL || 'sachchiyayexports@gmail.com', 
-        // Sender MUST be a verified single sender or domain in SendGrid
-        from: process.env.EMAIL_USER, 
+        from: process.env.EMAIL_USER, // Sender MUST be a verified single sender/domain in SendGrid
         subject: `[Sachchiyay Inquiry] New Client: ${name}`,
         
         html: `
@@ -60,7 +58,7 @@ app.post(API_ENDPOINT, asyncHandler(async (req, res) => {
                 <p><strong>Name:</strong> ${name}</p>
                 <p><strong>Email:</strong> <a href="mailto:${email}">${email}</a></p>
                 <p><strong>Phone:</strong> ${contactNumber || 'N/A'}</p>
-                <p><strong>Subject:</strong> ${subject || 'N/A'}</p>
+                <p><strong>Subject:</strong> ${subject || 'General Website Inquiry'}</p>
                 <hr style="border: 0; border-top: 1px solid #e0e0e0;">
                 <h3 style="color: #1f2937;">Message Details:</h3>
                 <p style="white-space: pre-wrap; padding: 10px; background-color: #f9fafb; border-left: 3px solid #3b82f6;">${remark}</p>
@@ -75,14 +73,14 @@ app.post(API_ENDPOINT, asyncHandler(async (req, res) => {
         res.status(200).json({ 
             message: "Inquiry submitted successfully! Email notification sent." 
         });
+
     } catch (error) {
         console.error('SendGrid Email Error:', error);
         if (error.response) {
-            // Log the detailed SendGrid API error for backend debugging
             console.error('SendGrid Response Body:', error.response.body);
         }
         
-        res.status(500); // Send a 500 error status to the frontend
+        res.status(500); // Set response status to 500 (Internal Server Error)
         throw new Error('Failed to send inquiry email. Check server logs for SendGrid details.');
     }
 }));
@@ -93,18 +91,20 @@ app.get('/', (req, res) => {
     res.send({ status: 'OK', message: 'Sachchiyay Exports API is running and ready for inquiries...' });
 });
 
-// --- 5. Error Handling Middleware (MUST be the last app.use) ---
+// --- 5. Error Handling Middleware (Catches errors from asyncHandler) ---
 app.use((err, req, res, next) => {
+    // If a status code hasn't been set by us, default to 500
     const statusCode = res.statusCode === 200 ? 500 : res.statusCode;
     
-    // Use the status code already set, or default to 500
     res.status(statusCode).json({
         message: err.message,
+        // Only include stack trace in development, not production
         stack: process.env.NODE_ENV === 'production' ? null : err.stack,
     });
 });
 
-// Start Server
+
+// --- 6. Server Start ---
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });
