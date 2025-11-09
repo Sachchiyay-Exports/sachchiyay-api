@@ -1,37 +1,41 @@
-const express = require('express');
-const dotenv = require('dotenv'); // ⬅️ CRITICAL FIX: Missing require
-const cors = require('cors');
-const asyncHandler = require('express-async-handler'); // ⬅️ CRITICAL FIX: Missing require
-const sgMail = require('@sendgrid/mail');
+// backend/server.js
 
-// Load environment variables from .env file (local use only; Render uses its UI)
+// --- 1. Imports ---
+const express = require('express');
+const dotenv = require('dotenv'); 
+const cors = require('cors');
+const asyncHandler = require('express-async-handler');
+const sgMail = require('@sendgrid/mail');
+// const mongoose = require('mongoose'); // Uncomment this if you are using MongoDB
+
+// Load environment variables immediately
 dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 5000;
+const API_ENDPOINT = '/api/inquiries'; 
 
-// --- Initialize SendGrid ---
+// --- 2. SendGrid Configuration (CRITICAL) ---
 if (process.env.SENDGRID_API_KEY) {
     sgMail.setApiKey(process.env.SENDGRID_API_KEY);
     console.log("SendGrid API Key successfully loaded.");
 } else {
-    // This warning is fine, as Render ensures process.env is set if configured.
+    // This warning is helpful, but the service will still run.
     console.error("SENDGRID_API_KEY is NOT set. Email sending will fail.");
 }
 
-// ---------------------------------
-// Middleware Setup
-// ---------------------------------
-app.use(cors());
-app.use(express.json()); // ⬅️ CRITICAL FIX: Required to read req.body for POST requests
+// --- 3. Middleware Setup ---
+// CRITICAL FIX: Use FRONTEND_URL to restrict CORS access to your Vercel site
+app.use(cors({
+    origin: ['http://localhost:3000', process.env.FRONTEND_URL], 
+    credentials: true,
+})); 
+app.use(express.json()); // Required to read JSON bodies from the frontend
+app.use(express.urlencoded({ extended: true })); // Good practice for form data
 
-// Basic health check route
-app.get('/', (req, res) => {
-    res.send({ status: 'OK', message: 'API is running' });
-});
 
-// --- Inquiry Submission Route ---
-app.post('/api/inquiries', asyncHandler(async (req, res) => {
+// --- 4. Inquiry Submission Route ---
+app.post(API_ENDPOINT, asyncHandler(async (req, res) => {
     // Data received from the React InquiryForm component
     const { name, email, contactNumber, subject, remark } = req.body;
 
@@ -43,11 +47,12 @@ app.post('/api/inquiries', asyncHandler(async (req, res) => {
 
     // Email configuration for SendGrid
     const msg = {
-        // Recipient can be defined in Render environment variables
+        // Recipient email address
         to: process.env.RECIPIENT_EMAIL || 'sachchiyayexports@gmail.com', 
         // Sender MUST be a verified single sender or domain in SendGrid
         from: process.env.EMAIL_USER, 
         subject: `[Sachchiyay Inquiry] New Client: ${name}`,
+        
         html: `
             <div style="font-family: Arial, sans-serif; line-height: 1.6; padding: 20px; border: 1px solid #e0e0e0; border-radius: 8px;">
                 <h2 style="color: #3b82f6;">New Inquiry Received</h2>
@@ -73,18 +78,26 @@ app.post('/api/inquiries', asyncHandler(async (req, res) => {
     } catch (error) {
         console.error('SendGrid Email Error:', error);
         if (error.response) {
-            // Log the detailed error from SendGrid for server-side debugging
+            // Log the detailed SendGrid API error for backend debugging
             console.error('SendGrid Response Body:', error.response.body);
         }
         
-        res.status(500);
-        throw new Error('Failed to send inquiry email. Please check server logs for SendGrid details.');
+        res.status(500); // Send a 500 error status to the frontend
+        throw new Error('Failed to send inquiry email. Check server logs for SendGrid details.');
     }
 }));
 
-// Placeholder for error handling middleware (recommended for express-async-handler)
+
+// Default API route for health checks
+app.get('/', (req, res) => {
+    res.send({ status: 'OK', message: 'Sachchiyay Exports API is running and ready for inquiries...' });
+});
+
+// --- 5. Error Handling Middleware (MUST be the last app.use) ---
 app.use((err, req, res, next) => {
     const statusCode = res.statusCode === 200 ? 500 : res.statusCode;
+    
+    // Use the status code already set, or default to 500
     res.status(statusCode).json({
         message: err.message,
         stack: process.env.NODE_ENV === 'production' ? null : err.stack,
@@ -93,5 +106,5 @@ app.use((err, req, res, next) => {
 
 // Start Server
 app.listen(PORT, () => {
-    console.log(`Server is running in ${process.env.NODE_ENV} mode on port ${PORT}`);
+    console.log(`Server is running on port ${PORT}`);
 });
